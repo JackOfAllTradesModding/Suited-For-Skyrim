@@ -1,4 +1,4 @@
-ScriptName S4S_FelineMaskGag Extends zadGagScript
+ScriptName S4S_FelineMaskFull Extends zadGagScript
 ;zadLibs Property libs Auto
 Message Property S4S_KeyMsg Auto;
 Message Property S4S_NoKeyMsg Auto;

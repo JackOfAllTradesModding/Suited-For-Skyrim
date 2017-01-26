@@ -1,4 +1,4 @@
-ScriptName S4S_FelineGloveUninflated Extends zadGlovesScript
+ScriptName S4S_FelineSuit3 Extends zadBodyHarnessScript
 ;zadLibs Property libs Auto
 Message Property S4S_KeyMsg Auto;
 Message Property S4S_NoKeyMsg Auto;
@@ -30,15 +30,3 @@ EndFunction
 Function OnEquippedPost(actor akActor)
 
 EndFunction
-
-;Function OnRemoveDevice(actor akActor)
-;	if !libs.IsAnimating(akActor)
-;		akActor.ClearExpressionOverride()
-;		ResetPhonemeModifier(akActor)
-;	EndIf
-;EndFunction
-
-;no reason to fuck with this yet
-;Function OnEquippedPost(actor akActor)
-;	libs.ApplyGagEffect(akActor)
-;EndFunction

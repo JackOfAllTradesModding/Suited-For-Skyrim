@@ -11,6 +11,10 @@ Function OnEquippedPre(Actor akActor, bool silent=false)
 
 EndFunction
 
+Function OnEquippedPost(actor akActor)
+
+EndFunction
+
 Int Function OnEquippedFilter(actor akActor, bool silent=false)
 	
 	;;FIXME RELEASE: if not player return 2 
