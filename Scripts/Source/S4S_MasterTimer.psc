@@ -33,11 +33,11 @@ EndEvent
 
 Function ResetTimer(bool Long, bool Done)
 
-	CurrentTime = 0;
-	isLongTime = Long;
-	isShortTimme = !Long; Sets both to the proper value
 	
 	If (!Done)
+		CurrentTime = 0;
+		isLongTime = Long;
+		isShortTimme = !Long; Sets both to the proper value
 		RegisterForSingleUpdateGameTime(1.0)
 	Else
 		SuitComplete = True;
