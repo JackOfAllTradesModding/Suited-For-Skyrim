@@ -2,14 +2,9 @@
 ;NEXT FRAGMENT INDEX 12
 Scriptname S4S_Intro_QF Extends Quest Hidden
 
-;BEGIN ALIAS PROPERTY DeliveryBoy
+;BEGIN ALIAS PROPERTY CollarPlaceholder
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_DeliveryBoy Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY PlayerAlias
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_PlayerAlias Auto
+ReferenceAlias Property Alias_CollarPlaceholder Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN ALIAS PROPERTY MralkiInnMarker
@@ -17,14 +12,14 @@ ReferenceAlias Property Alias_PlayerAlias Auto
 ReferenceAlias Property Alias_MralkiInnMarker Auto
 ;END ALIAS PROPERTY
 
-;BEGIN ALIAS PROPERTY Mralki
+;BEGIN ALIAS PROPERTY PlayerAlias
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_Mralki Auto
+ReferenceAlias Property Alias_PlayerAlias Auto
 ;END ALIAS PROPERTY
 
-;BEGIN ALIAS PROPERTY CollarPlaceholder
+;BEGIN ALIAS PROPERTY DeliveryBoy
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_CollarPlaceholder Auto
+ReferenceAlias Property Alias_DeliveryBoy Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN ALIAS PROPERTY S4S_InnMarkerAlias
@@ -32,9 +27,35 @@ ReferenceAlias Property Alias_CollarPlaceholder Auto
 ReferenceAlias Property Alias_S4S_InnMarkerAlias Auto
 ;END ALIAS PROPERTY
 
+;BEGIN ALIAS PROPERTY Mralki
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_Mralki Auto
+;END ALIAS PROPERTY
+
+;BEGIN FRAGMENT Fragment_0
+Function Fragment_0()
+;BEGIN CODE
+;Moves the delivery boy close to the player and gets that forcegreet ready
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_2
+Function Fragment_2()
+;BEGIN CODE
+S4S_KnockoutFooled.Show(); show messagebox
+Utility.wait(0.1); Pauses script while messagebox is open
+Game.GetPlayer().RemoveItem(Gold, 5000); Remove our new friends pay
+Game.FadeOutGame(true, true, 1.0, 0.5) ;Wait half a second, then fade to black over one second
+SetStage(200); end stage for this quest, starts S4S_Dummy
+;END CODE
+EndFunction
+;END FRAGMENT
+
 ;BEGIN FRAGMENT Fragment_5
 Function Fragment_5()
 ;BEGIN CODE
+Game.GetPlayer().EquipItem(Alias_CollarPlaceholder.GetReference(), true, true);
 Game.GetPlayer().Moveto(InnMarker.GetReference()); move the player to the inn
 Alias_Mralki.GetReference().Moveto(Alias_MralkiInnMarker.GetReference());
 Game.FadeOutGame(False, true, 1.0, 2.0);
@@ -48,30 +69,10 @@ SetStage(201);
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_0
-Function Fragment_0()
-;BEGIN CODE
-;Moves the delivery boy close to the player and gets that forcegreet ready
-;END CODE
-EndFunction
-;END FRAGMENT
-
 ;BEGIN FRAGMENT Fragment_4
 Function Fragment_4()
 ;BEGIN CODE
 S4S_KnockoutNoGo.Show(); show messagebox
-Utility.wait(0.1); Pauses script while messagebox is open
-Game.GetPlayer().RemoveItem(Gold, 5000); Remove our new friends pay
-Game.FadeOutGame(true, true, 1.0, 0.5) ;Wait half a second, then fade to black over one second
-SetStage(200); end stage for this quest, starts S4S_Dummy
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_2
-Function Fragment_2()
-;BEGIN CODE
-S4S_KnockoutFooled.Show(); show messagebox
 Utility.wait(0.1); Pauses script while messagebox is open
 Game.GetPlayer().RemoveItem(Gold, 5000); Remove our new friends pay
 Game.FadeOutGame(true, true, 1.0, 0.5) ;Wait half a second, then fade to black over one second
@@ -103,3 +104,13 @@ ReferenceAlias Property InnMarker  Auto
 Quest Property S4S_Master  Auto  
 
 Quest Property S4S_Dummy  Auto  
+
+Actor Property PlayerRef  Auto  
+
+Armor Property S4S_FelineCollarUninflatedInventory  Auto  
+
+Armor Property S4S_FelineCollarUninflatedRendered  Auto  
+
+zadlibs Property libs  Auto  
+
+Keyword Property S4S_Collar  Auto  
