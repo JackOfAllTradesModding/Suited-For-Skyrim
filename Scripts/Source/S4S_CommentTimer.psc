@@ -2,21 +2,8 @@ Scriptname S4S_CommentTimer extends Quest
 {Handles 1-3 hour swap between comments being enabled and comments not}
 
 Int Function CoolDown()
-	If (S4S_Master.GetStage() == 130)
-		S4S_Master.SetStage(135);
-	ElseIf (S4S_Master.GetStage() == 140)
-		S4S_Master.SetStage(145);
-	Else
-		Return 1;
-	EndIf
-
-	S4S_SexCount = S4S_SexCount + 1;
 	
-	Int a = S4S_NewLife.getStage()
-	If (a < 100)
-		S4S_NewLife.setStage(a+10);
-	EndIf
-	
+	S4S_CommentCoolDown.SetValue(1)	
 	RegisterForSingleUpdateGameTime(1.0 + Utility.RandomFloat(0.0, 2.0));
 	GoToState("Frozen");
 	Return 0;
@@ -26,6 +13,8 @@ Event OnUpdateGameTime()
 	;Should not do anything in this state
 EndEvent
 
+;=============================================================================
+
 State Frozen
 
 Int Function CoolDown()
@@ -33,22 +22,17 @@ Int Function CoolDown()
 EndFunction
 
 Event OnUpdateGameTime()
-	If (S4S_Master.GetStage() == 135)
-		S4S_Master.SetStage(130)
-	ElseIf (S4S_Master.GetStage() == 145)
-		S4S_Master.SetStage(140)
-	EndIf
-
+	
+	S4S_CommentCoolDown.SetValue(0)
 	GoToState("")
 EndEvent
 
 EndState
 
 Quest Property S4S_Master Auto;
-Quest Property S4S_Master2  Auto  
-{first property is defunct, but not deleted to avoid log errors on startup}
 
 Int Property S4S_SexCount = 0 Auto  
 {Tracks the number of times the player gets fucked after they become fully suited}
 
-Quest Property S4S_NewLife  Auto  
+Quest Property S4S_NewLife  Auto 
+GlobalVariable Property S4S_CommentCoolDown  Auto  

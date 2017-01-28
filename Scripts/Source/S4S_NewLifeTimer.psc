@@ -14,7 +14,7 @@ Event OnUpdateGameTime()
 
 	CurrentTime += 1;
 	If(CurrentTime >= TimeLimit)
-		;SetStage to stagedone (will bypass 10 acts)
+		S4S_NewLife.SetStage(1);
 	Else
 
 	EndIf
