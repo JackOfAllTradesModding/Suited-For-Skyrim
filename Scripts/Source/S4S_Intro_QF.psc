@@ -7,14 +7,9 @@ Scriptname S4S_Intro_QF Extends Quest Hidden
 ReferenceAlias Property Alias_CollarPlaceholder Auto
 ;END ALIAS PROPERTY
 
-;BEGIN ALIAS PROPERTY MralkiInnMarker
+;BEGIN ALIAS PROPERTY Mralki
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_MralkiInnMarker Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY PlayerAlias
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_PlayerAlias Auto
+ReferenceAlias Property Alias_Mralki Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN ALIAS PROPERTY DeliveryBoy
@@ -22,23 +17,20 @@ ReferenceAlias Property Alias_PlayerAlias Auto
 ReferenceAlias Property Alias_DeliveryBoy Auto
 ;END ALIAS PROPERTY
 
+;BEGIN ALIAS PROPERTY MralkiInnMarker
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_MralkiInnMarker Auto
+;END ALIAS PROPERTY
+
 ;BEGIN ALIAS PROPERTY S4S_InnMarkerAlias
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_S4S_InnMarkerAlias Auto
 ;END ALIAS PROPERTY
 
-;BEGIN ALIAS PROPERTY Mralki
+;BEGIN ALIAS PROPERTY PlayerAlias
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_Mralki Auto
+ReferenceAlias Property Alias_PlayerAlias Auto
 ;END ALIAS PROPERTY
-
-;BEGIN FRAGMENT Fragment_0
-Function Fragment_0()
-;BEGIN CODE
-;Moves the delivery boy close to the player and gets that forcegreet ready
-;END CODE
-EndFunction
-;END FRAGMENT
 
 ;BEGIN FRAGMENT Fragment_2
 Function Fragment_2()
@@ -52,14 +44,22 @@ SetStage(200); end stage for this quest, starts S4S_Dummy
 EndFunction
 ;END FRAGMENT
 
+;BEGIN FRAGMENT Fragment_0
+Function Fragment_0()
+;BEGIN CODE
+;Moves the delivery boy close to the player and gets that forcegreet ready
+;END CODE
+EndFunction
+;END FRAGMENT
+
 ;BEGIN FRAGMENT Fragment_5
 Function Fragment_5()
 ;BEGIN CODE
-Game.GetPlayer().EquipItem(Alias_CollarPlaceholder.GetReference(), true, true);
+libs.EquipDevice(PlayerRef, S4S_FelineCollarUninflatedInventory, S4S_FelineCollarUninflatedRendered, S4S_Collar)
 Game.GetPlayer().Moveto(InnMarker.GetReference()); move the player to the inn
 Alias_Mralki.GetReference().Moveto(Alias_MralkiInnMarker.GetReference());
 Game.FadeOutGame(False, true, 1.0, 2.0);
-Game.GetPlayer().EquipItem(Alias_CollarPlaceholder.GetReference(), true, true);
+;Game.GetPlayer().EquipItem(Alias_CollarPlaceholder.GetReference(), true, true);
 Game.GetPlayer().PlayIdle(WakeUp)
 utility.wait(1.5); in case this keeps running while we fade back in
 SetStage(201);
