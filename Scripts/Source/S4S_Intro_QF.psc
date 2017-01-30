@@ -2,19 +2,14 @@
 ;NEXT FRAGMENT INDEX 12
 Scriptname S4S_Intro_QF Extends Quest Hidden
 
-;BEGIN ALIAS PROPERTY CollarPlaceholder
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_CollarPlaceholder Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY Mralki
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_Mralki Auto
-;END ALIAS PROPERTY
-
 ;BEGIN ALIAS PROPERTY DeliveryBoy
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_DeliveryBoy Auto
+;END ALIAS PROPERTY
+
+;BEGIN ALIAS PROPERTY PlayerAlias
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_PlayerAlias Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN ALIAS PROPERTY MralkiInnMarker
@@ -27,44 +22,24 @@ ReferenceAlias Property Alias_MralkiInnMarker Auto
 ReferenceAlias Property Alias_S4S_InnMarkerAlias Auto
 ;END ALIAS PROPERTY
 
-;BEGIN ALIAS PROPERTY PlayerAlias
+;BEGIN ALIAS PROPERTY CollarPlaceholder
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_PlayerAlias Auto
+ReferenceAlias Property Alias_CollarPlaceholder Auto
 ;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_2
-Function Fragment_2()
-;BEGIN CODE
-S4S_KnockoutFooled.Show(); show messagebox
-Utility.wait(0.1); Pauses script while messagebox is open
-Game.GetPlayer().RemoveItem(Gold, 5000); Remove our new friends pay
-Game.FadeOutGame(true, true, 1.0, 0.5) ;Wait half a second, then fade to black over one second
-SetStage(200); end stage for this quest, starts S4S_Dummy
-;END CODE
-EndFunction
-;END FRAGMENT
+;BEGIN ALIAS PROPERTY Mralki
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_Mralki Auto
+;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_0
-Function Fragment_0()
+;BEGIN FRAGMENT Fragment_10
+Function Fragment_10()
 ;BEGIN CODE
-;Moves the delivery boy close to the player and gets that forcegreet ready
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_5
-Function Fragment_5()
-;BEGIN CODE
-libs.EquipDevice(PlayerRef, S4S_FelineCollarUninflatedInventory, S4S_FelineCollarUninflatedRendered, S4S_Collar)
-Game.GetPlayer().Moveto(InnMarker.GetReference()); move the player to the inn
-Alias_Mralki.GetReference().Moveto(Alias_MralkiInnMarker.GetReference());
-Game.FadeOutGame(False, true, 1.0, 2.0);
-;Game.GetPlayer().EquipItem(Alias_CollarPlaceholder.GetReference(), true, true);
-Game.GetPlayer().PlayIdle(WakeUp)
-utility.wait(1.5); in case this keeps running while we fade back in
-SetStage(201);
-;
-;Moved to Mralki Dialogue and Extra Stage to flow better
+S4S_Dummy.Start();
+S4S_Dummy.SetStage(0);
+S4S_Master.Start();
+S4S_Master.SetStage(0);
+stop();
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -81,10 +56,39 @@ SetStage(200); end stage for this quest, starts S4S_Dummy
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_10
-Function Fragment_10()
+;BEGIN FRAGMENT Fragment_2
+Function Fragment_2()
 ;BEGIN CODE
-stop();
+S4S_KnockoutFooled.Show(); show messagebox
+Utility.wait(0.1); Pauses script while messagebox is open
+Game.GetPlayer().RemoveItem(Gold, 5000); Remove our new friends pay
+Game.FadeOutGame(true, true, 1.0, 0.5) ;Wait half a second, then fade to black over one second
+SetStage(200); end stage for this quest, starts S4S_Dummy
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_5
+Function Fragment_5()
+;BEGIN CODE
+libs.EquipDevice(PlayerRef, S4S_FelineCollarUninflatedInventory, S4S_FelineCollarUninflatedRendered, S4S_Collar)
+Game.GetPlayer().Moveto(InnMarker.GetReference()); move the player to the inn
+Alias_Mralki.GetReference().Moveto(Alias_MralkiInnMarker.GetReference());
+Game.FadeOutGame(False, true, 1.0, 2.0);
+;Game.GetPlayer().EquipItem(Alias_CollarPlaceholder.GetReference(), true, true);
+Game.GetPlayer().PlayIdle(WakeUp)
+utility.wait(1.5); in case this keeps running while we fade back in
+SetStage(202);
+;
+;Moved to Mralki Dialogue and Extra Stage to flow better
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_0
+Function Fragment_0()
+;BEGIN CODE
+;Moves the delivery boy close to the player and gets that forcegreet ready
 ;END CODE
 EndFunction
 ;END FRAGMENT
