@@ -46,6 +46,4 @@ ReferenceAlias Property InnMarker  Auto
 
 Quest Property S4S_Dummy Auto  
 
-Quest Property S4S_Master  Auto  
-
-Quest Property S4S_Master  Auto  
+Quest Property S4S_Master  Auto
