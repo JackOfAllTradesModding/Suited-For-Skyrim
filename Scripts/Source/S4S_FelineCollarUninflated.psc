@@ -6,9 +6,9 @@ Message Property S4S_NoKeyMsg Auto;
 Function OnEquippedPre(Actor akActor, bool silent=false)
 	;;FIXME RELEASE: Defaul silent to true
 	if !silent
-		libs.NotifyActor(GetMessageName(akActor)+" is equipping the feline collar", akActor, true)
+		libs.NotifyActor("You examine the smooth rubber collar before carefully stretching it and placing it around "+GetMessageNAme(akActor)+ " neck, and it quickly constricts to be much tighter fitting. It won't be coming off any time soon.", akActor, true)
 	EndIf
-
+	
 EndFunction
 
 Function OnEquippedPost(actor akActor)
