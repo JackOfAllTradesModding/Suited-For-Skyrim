@@ -6,7 +6,7 @@ Scriptname S4S_Frag_DollMaker_MaskOff Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-libs.RemoveDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, S4S_MaskFull)
+libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousHood, S4S_MaskFull)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -22,3 +22,5 @@ Armor Property S4S_FelineMask2Inventory  Auto
 Armor Property S4S_FelineMask2Rendered  Auto  
 
 Keyword Property S4S_MaskFull  Auto  
+
+Keyword Property zad_DeviousHood  Auto  

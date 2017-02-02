@@ -9,7 +9,7 @@ Actor akSpeaker = akSpeakerRef as Actor
 S4S_Dummy.SetStage(42);
 ;rape scene
 ;include sexlabutil as a property???
-sslThreadController Thread = SexLabUtil.QuickStart(akSpeaker, PlayerRef.getReference() as Actor, victim = PlayerRef.getReference() as Actor)
+sslThreadController Thread = SexLabUtil.QuickStart(akSpeaker, Player, victim = Player)
 ;if (Thread) to check if ir worked
 ;END CODE
 EndFunction
@@ -19,3 +19,5 @@ EndFunction
 
 Quest Property S4S_Dummy  Auto  
 ReferenceAlias Property PlayerRef Auto 
+
+Actor Property Player  Auto  

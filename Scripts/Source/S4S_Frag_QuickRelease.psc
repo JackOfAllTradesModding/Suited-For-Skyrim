@@ -6,10 +6,10 @@ Scriptname S4S_Frag_QuickRelease Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-libs.RemoveDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, S4S_CollarFull, True, True)
-libs.RemoveDevice(PlayerREF, S4S_FelineGlovesInflatedInventory, S4S_FelineGlovesInflatedRendered, S4S_GlovesFull, True, True)
-libs.RemoveDevice(PlayerREF, S4S_FelineBootsInflatedInventory, S4S_FelineBootsInflatedRendered, S4S_BootsFull, True, True)
-libs.RemoveDevice(PlayerREF, S4S_FelineSuit3Inventory, S4S_FelineSuit3Rendered, S4S_SuitFull, True, True)
+libs.RemoveQuestDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, zad_DeviousCollar, S4S_CollarFull, True)
+libs.RemoveQuestDevice(PlayerREF, S4S_FelineGlovesInflatedInventory, S4S_FelineGlovesInflatedRendered, zad_DeviousBondageMittens, S4S_GlovesFull, True)
+libs.RemoveQuestDevice(PlayerREF, S4S_FelineBootsInflatedInventory, S4S_FelineBootsInflatedRendered, zad_DeviousBoots, S4S_BootsFull, True)
+libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit3Inventory, S4S_FelineSuit3Rendered, zad_DeviousSuit, S4S_SuitFull, True)
 ;Everything Removed
 ;Advance QuestStage
 S4S_LadyInRubber.SetStage(15);
@@ -44,3 +44,11 @@ Keyword Property S4S_GlovesFull  Auto
 Keyword Property S4S_MaskFull  Auto 
 Keyword Property S4S_SuitFull  Auto  
 Quest Property S4S_LadyInRubber  Auto  
+
+Keyword Property zad_DeviousCollar  Auto  
+
+Keyword Property zad_DeviousBondageMittens  Auto  
+
+Keyword Property zad_DeviousBoots  Auto  
+
+Keyword Property zad_DeviousSuit  Auto  

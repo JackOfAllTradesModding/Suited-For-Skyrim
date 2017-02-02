@@ -2,39 +2,9 @@
 ;NEXT FRAGMENT INDEX 25
 Scriptname QF_S4S_Dummy_0200436E Extends Quest Hidden
 
-;BEGIN ALIAS PROPERTY S4S_RubberRemoverAlias
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_S4S_RubberRemoverAlias Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY S4S_AlftlandChest
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_S4S_AlftlandChest Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY S4S_BrinehammerChest
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_S4S_BrinehammerChest Auto
-;END ALIAS PROPERTY
-
 ;BEGIN ALIAS PROPERTY S4S_Journal2Alias
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_S4S_Journal2Alias Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY S4S_SlavemakerAlias
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_S4S_SlavemakerAlias Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY S4S_Mralki
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_S4S_Mralki Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY S4S_Hulda
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_S4S_Hulda Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN ALIAS PROPERTY S4S_BleakcoastCaveObj
@@ -47,44 +17,40 @@ ReferenceAlias Property Alias_S4S_BleakcoastCaveObj Auto
 ReferenceAlias Property Alias_S4S_Urag Auto
 ;END ALIAS PROPERTY
 
+;BEGIN ALIAS PROPERTY S4S_SlavemakerAlias
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_S4S_SlavemakerAlias Auto
+;END ALIAS PROPERTY
+
 ;BEGIN ALIAS PROPERTY S4S_JournalAlias
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_S4S_JournalAlias Auto
 ;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_15
-Function Fragment_15()
-;BEGIN CODE
-;Player is now bound, re-enables alftland conversation.
-;END CODE
-EndFunction
-;END FRAGMENT
+;BEGIN ALIAS PROPERTY S4S_AlftlandChest
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_S4S_AlftlandChest Auto
+;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_0
-Function Fragment_0()
-;BEGIN CODE
-SetObjectiveDisplayed(0); "Ask Mralki for More Information"
-;END CODE
-EndFunction
-;END FRAGMENT
+;BEGIN ALIAS PROPERTY S4S_BrinehammerChest
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_S4S_BrinehammerChest Auto
+;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_7
-Function Fragment_7()
-;BEGIN CODE
-;Player fucked the orc, continue dialogue
-;END CODE
-EndFunction
-;END FRAGMENT
+;BEGIN ALIAS PROPERTY S4S_Hulda
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_S4S_Hulda Auto
+;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_1
-Function Fragment_1()
-;BEGIN CODE
-SetObjectiveCompleted(0); "Ask Mralki for More Information"
-Alias_S4S_JournalAlias.GetReference().Enable(True);
-SetObjectiveDisplayed(10); "Find the strange woman in Rannveig's Fast"
-;END CODE
-EndFunction
-;END FRAGMENT
+;BEGIN ALIAS PROPERTY S4S_Mralki
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_S4S_Mralki Auto
+;END ALIAS PROPERTY
+
+;BEGIN ALIAS PROPERTY S4S_RubberRemoverAlias
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_S4S_RubberRemoverAlias Auto
+;END ALIAS PROPERTY
 
 ;BEGIN FRAGMENT Fragment_11
 Function Fragment_11()
@@ -95,12 +61,22 @@ SetObjectiveDisplayed(50);
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_4
-Function Fragment_4()
+;BEGIN FRAGMENT Fragment_13
+Function Fragment_13()
+;BEGIN AUTOCAST TYPE S4S_UragBondage
+Quest __temp = self as Quest
+S4S_UragBondage kmyQuest = __temp as S4S_UragBondage
+;END AUTOCAST
 ;BEGIN CODE
-SetObjectiveCompleted(10);
-Alias_S4S_JournalAlias.Clear();So the attached script no longer fires.
-SetObjectiveDisplayed(30);Ask About the woman at the Bannered Mare
+;If MAster Stage == not bound
+;all bindings added
+;if not gagged
+;gag
+;else
+;fail quest.
+kmyQuest.TieHerUp()
+;Note to self: add separate script to apply restraints.
+;SetStage(46);
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -114,10 +90,10 @@ SetObjectiveDisplayed(70);
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_9
-Function Fragment_9()
+;BEGIN FRAGMENT Fragment_0
+Function Fragment_0()
 ;BEGIN CODE
-;Player did not fuck the orc, this opens the dialogue where you have to beg him to restrain you.
+SetObjectiveDisplayed(0); "Ask Mralki for More Information"
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -131,20 +107,18 @@ SetObjectiveDisplayed(40);Ask at the Arcanaeum
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_23
-Function Fragment_23()
+;BEGIN FRAGMENT Fragment_9
+Function Fragment_9()
 ;BEGIN CODE
-SetObjectiveCompleted(80);
-SetObjectiveDisplayed(90);
+;Player did not fuck the orc, this opens the dialogue where you have to beg him to restrain you.
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_3
-Function Fragment_3()
+;BEGIN FRAGMENT Fragment_15
+Function Fragment_15()
 ;BEGIN CODE
-;SetObjectiveCompleted(10);
-;SetObjectiveDisplayed(25); Read the journal
+;Player is now bound, re-enables alftland conversation.
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -159,18 +133,20 @@ SetObjectiveDisplayed(80);
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_13
-Function Fragment_13()
+;BEGIN FRAGMENT Fragment_4
+Function Fragment_4()
 ;BEGIN CODE
-;If MAster Stage == not bound
-;all bindings added
-;if not gagged
-;gag
-;else
-;fail quest.
+SetObjectiveCompleted(10);
+Alias_S4S_JournalAlias.Clear();So the attached script no longer fires.
+SetObjectiveDisplayed(30);Ask About the woman at the Bannered Mare
+;END CODE
+EndFunction
+;END FRAGMENT
 
-;Note to self: add separate script to apply restraints.
-SetStage(46);
+;BEGIN FRAGMENT Fragment_7
+Function Fragment_7()
+;BEGIN CODE
+;Player fucked the orc, continue dialogue
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -193,4 +169,34 @@ SetObjectiveDisplayed(20); "Search for any trace of the strange woman"
 EndFunction
 ;END FRAGMENT
 
+;BEGIN FRAGMENT Fragment_23
+Function Fragment_23()
+;BEGIN CODE
+SetObjectiveCompleted(80);
+SetObjectiveDisplayed(90);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_1
+Function Fragment_1()
+;BEGIN CODE
+SetObjectiveCompleted(0); "Ask Mralki for More Information"
+Alias_S4S_JournalAlias.GetReference().Enable(True);
+SetObjectiveDisplayed(10); "Find the strange woman in Rannveig's Fast"
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_3
+Function Fragment_3()
+;BEGIN CODE
+;SetObjectiveCompleted(10);
+;SetObjectiveDisplayed(25); Read the journal
+;END CODE
+EndFunction
+;END FRAGMENT
+
 ;END FRAGMENT CODE - Do not edit anything between this and the begin comment
+
+S4S_UragBondage Property Handler  Auto  
