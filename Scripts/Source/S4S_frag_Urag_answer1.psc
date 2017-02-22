@@ -8,7 +8,7 @@ Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 S4S_Dummy.SetStage(42);
 ;consensual sex scene
-sslThreadController Thread = SexLabUtil.QuickStart(akSpeaker, Player)
+sslThreadController Thread = SexLabUtil.QuickStart(Player, akSpeaker)
 ;END CODE
 EndFunction
 ;END FRAGMENT

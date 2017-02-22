@@ -10,7 +10,7 @@ Bool Property SuitComplete = False Auto;
 Bool Property UpdateHalted = False Auto;
 Int Property Stage = 0 Auto;
 
-GlobalVariable Property GameHour Auto;
+GlobalVariable Property GameHour Auto; Deprecated
 Float Property UpdateStartTime Auto;
 Float Property UpdateEndTime Auto
 
@@ -34,8 +34,10 @@ Event OnUpdateGameTime()
 	EndIf
 	
 	;Advance Timer
-	UpdateEndTime = GameHour.GetValue();
-	Float dif = UpdateEndTime - UpdateStartTime
+	UpdateEndTime = Utility.GetCurrentGameTime();
+	Float dif = (UpdateEndTime - UpdateStartTime) * 24
+	
+	;Theoretically no longer needed
 	if dif <0
 		dif += 24.0
 	EndIf
@@ -46,7 +48,7 @@ Event OnUpdateGameTime()
 		;Update
 		S4S_Master.SetStage(S4S_Master.GetStage()+10);
 	Else
-		UpdateStartTime = GameHour.GetValue();
+		UpdateStartTime = Utility.GetCurrentGameTime();
 		RegisterForSingleUpdateGameTime(1.0);
 	EndIf
 	
@@ -56,7 +58,7 @@ Function ResetTimer(bool Long, bool Done)
 		
 	If (!Done)
 		CurrentTime = 0;
-		UpdateStartTime = GameHour.GetValue();
+		UpdateStartTime = Utility.GetCurrentGameTime();
 		isLongTime = Long;
 		isShortTimme = !Long; Sets both to the proper value
 		RegisterForSingleUpdateGameTime(1.0)

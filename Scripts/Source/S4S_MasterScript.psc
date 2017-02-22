@@ -327,7 +327,7 @@ Function EquipMask(int stage = 0)
 		;;DEBUG
 		Return;
 	EndIf
-	S4S_Master
+	;S4S_Master was originally going to set the stage one forward but it is unnecesary.
 EndFunction
 
 ;Show final message, stop Timer, start NewLife Quest

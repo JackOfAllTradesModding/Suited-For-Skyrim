@@ -7,39 +7,6 @@ Scriptname QF_S4S_Master_020048E3 Extends Quest Hidden
 ReferenceAlias Property Alias_S4S_PlayerAlias Auto
 ;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_15
-Function Fragment_15()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-kmyQuest.ExpandSuit(90);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_20
-Function Fragment_20()
-;BEGIN CODE
-;WARNING: Unable to load fragment source from function Fragment_20 in script QF_S4S_Master_020048E3
-;Source NOT loaded
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_6
-Function Fragment_6()
-;BEGIN AUTOCAST TYPE S4S_MasterTimer
-Quest __temp = self as Quest
-S4S_MasterTimer kmyQuest = __temp as S4S_MasterTimer
-;END AUTOCAST
-;BEGIN CODE
-kmyQuest.ResetTimer(false,False) ; Starts short timer
-;END CODE
-EndFunction
-;END FRAGMENT
-
 ;BEGIN FRAGMENT Fragment_8
 Function Fragment_8()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
@@ -48,18 +15,6 @@ s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
 kmyQuest.ExpandSuit(20);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_7
-Function Fragment_7()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-kmyQuest.ExpandSuit(10);
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -76,26 +31,38 @@ kmyQuest.ExpandSuit(40);
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_16
-Function Fragment_16()
+;BEGIN FRAGMENT Fragment_7
+Function Fragment_7()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
 Quest __temp = self as Quest
 s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
-kmyQuest.ExpandSuit(100);
+kmyQuest.ExpandSuit(10);
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_9
-Function Fragment_9()
+;BEGIN FRAGMENT Fragment_11
+Function Fragment_11()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
 Quest __temp = self as Quest
 s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
-kmyQuest.ExpandSuit(30);
+kmyQuest.ExpandSuit(50);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_15
+Function Fragment_15()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+kmyQuest.ExpandSuit(90);
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -108,6 +75,18 @@ s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
 kmyQuest.ExpandSuit(70);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_6
+Function Fragment_6()
+;BEGIN AUTOCAST TYPE S4S_MasterTimer
+Quest __temp = self as Quest
+S4S_MasterTimer kmyQuest = __temp as S4S_MasterTimer
+;END AUTOCAST
+;BEGIN CODE
+kmyQuest.ResetTimer(false,False) ; Starts short timer
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -125,14 +104,22 @@ S4S_NewLife.Start();
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_14
-Function Fragment_14()
+;BEGIN FRAGMENT Fragment_16
+Function Fragment_16()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
 Quest __temp = self as Quest
 s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
-kmyQuest.ExpandSuit(80);
+kmyQuest.ExpandSuit(100);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_20
+Function Fragment_20()
+;BEGIN CODE
+;Empty for now,
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -149,14 +136,26 @@ kmyQuest.ExpandSuit(60);
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_11
-Function Fragment_11()
+;BEGIN FRAGMENT Fragment_9
+Function Fragment_9()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
 Quest __temp = self as Quest
 s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
-kmyQuest.ExpandSuit(50);
+kmyQuest.ExpandSuit(30);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_14
+Function Fragment_14()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+kmyQuest.ExpandSuit(80);
 ;END CODE
 EndFunction
 ;END FRAGMENT

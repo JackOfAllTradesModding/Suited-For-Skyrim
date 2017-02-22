@@ -9,7 +9,7 @@ Actor akSpeaker = akSpeakerRef as Actor
 S4S_Dummy.SetStage(42);
 ;rape scene
 ;include sexlabutil as a property???
-sslThreadController Thread = SexLabUtil.QuickStart(akSpeaker, Player, victim = Player)
+sslThreadController Thread = SexLabUtil.QuickStart(Player, akSpeaker, victim = Player)
 ;if (Thread) to check if ir worked
 ;END CODE
 EndFunction
