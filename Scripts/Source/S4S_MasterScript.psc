@@ -146,7 +146,7 @@ Function EquipSuit(int stage = 0)
 		Else
 			libs.EquipDevice(PlayerRef, S4S_FelineSuit2Inventory, S4S_FelineSuit2Rendered, zad_DeviousSuit)
 			Timer.ResetTimer(False, False);
-			S4S_msgEquipSuit1.Show()
+			S4S_msgEquipSuit2.Show()
 			
 		EndIf
 		
@@ -155,6 +155,8 @@ Function EquipSuit(int stage = 0)
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit2Inventory, S4S_FelineSuit2Rendered, zad_DeviousSuit, S4S_SuitMore, True)
 		;Show Message
 		S4S_msgEquipSuit3.Show();
+		Utility.Wait(0.1);
+		S4S_msgEquipSuit3b.Show();
 		;Equip Inflated Collar
 		libs.EquipDevice(PlayerREF, S4S_FelineSuit3Inventory, S4S_FelineSuit3Rendered, zad_DeviousSuit);
 		;Start Timer (Long)
@@ -251,6 +253,8 @@ Function EquipBoots(int stage = 0)
 	ElseIf Stage == 80
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineBootsUninflatedInventory, S4S_FelineBootsUninflatedRendered, zad_DeviousBoots, S4S_Boots, True)
 		S4S_msgEquipBoots2.Show()
+		Utility.Wait(0.1);
+		S4S_msgEquipBoots2b.Show()
 		libs.EquipDevice(PlayerREF, S4S_FelineBootsInflatedInventory, S4S_FelineBootsInflatedRendered, zad_DeviousBoots)
 		Timer.ResetTimer(True, False)
 		Return;
@@ -298,11 +302,13 @@ Function EquipMask(int stage = 0)
 		Else 
 			libs.EquipDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag)
 			S4S_msgEquipMask1.Show()
+			Utility.Wait(0.1);
+			S4S_msgEquipMask1b.Show()
 			Timer.ResetTimer(False, False)
 		EndIf
 	ElseIf Stage == 100
 		;check for blindfold
-		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag, S4S_Mask)
+		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag, S4S_Mask, True)
 		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
 			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousBlindFold)
 			Armor ren = libs.GetRenderedDevice(inv);
@@ -313,14 +319,16 @@ Function EquipMask(int stage = 0)
 				Return;
 			Else
 				S4S_msgEquipMask2Override.Show()
-				libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousHood)
+				libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
 				Timer.ResetTimer(False, False)
 				Utility.Wait(0.1);
 				S4S_msgEquipMask2Override.Show()
 			EndIf
 		Else
-			libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousHood)
+			libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
 			S4S_msgEquipMask2.Show()
+			Utility.Wait(0.1);
+			S4S_msgEquipMask2b.Show();
 			Timer.ResetTimer(False, False)
 		EndIf
 	Else
@@ -334,6 +342,8 @@ EndFunction
 Function EquipFinal()
 	;Everything equipped
 	S4S_msgEquipFinal.Show();
+	Utility.Wait(0.1);
+	S4S_msgEquipFinalb.Show();
 	Timer.resetTimer(False, True);
 	S4S_NewLife.Start();
 EndFunction
@@ -371,14 +381,19 @@ Armor Property S4S_FelineMask2Rendered Auto;
 Message Property S4S_msgEquipCollarInflated  Auto  
 Message Property S4S_msgEquipSuit1  Auto  
 Message Property S4S_msgEquipSuit2  Auto  
-Message Property S4S_msgEquipSuit3  Auto  
+Message Property S4S_msgEquipSuit3  Auto 
+Message Property S4S_msgEquipSuit3b  Auto   
 Message Property S4S_msgEquipBoots1  Auto  
-Message Property S4S_msgEquipBoots2  Auto  
+Message Property S4S_msgEquipBoots2  Auto 
+Message Property S4S_msgEquipBoots2b Auto 
 Message Property S4S_msgEquipGloves1  Auto  
 Message Property S4S_msgEquipGloves2  Auto  
 Message Property S4S_msgEquipMask1  Auto  
-Message Property S4S_msgEquipMask2  Auto  
+Message Property S4S_msgEquipMask1b Auto
+Message Property S4S_msgEquipMask2  Auto
+Message Property S4S_msgEquipMask2b  Auto  
 Message Property S4S_msgEquipFinal  Auto  
+Message Property S4S_msgEquipFinalb  Auto  
 
 ;Messages to equip pieces while another device is in the way
 Message Property S4S_msgEquipSuit1Override Auto

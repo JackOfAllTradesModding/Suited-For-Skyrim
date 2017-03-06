@@ -20,7 +20,7 @@ S4S_NewLifeTimer kmyQuest = __temp as S4S_NewLifeTimer
 ;END AUTOCAST
 ;BEGIN CODE
 SetObjectiveDisplayed(0);
-kmyQuest.OnGameReload();
+kmyQuest.StartTimer();
 ;END CODE
 EndFunction
 ;END FRAGMENT

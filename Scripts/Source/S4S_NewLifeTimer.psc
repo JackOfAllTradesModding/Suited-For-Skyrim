@@ -8,15 +8,19 @@ Float Property UpdateEndTime=0.0 Auto;
 GlobalVariable Property GameHour Auto;
 Quest Property S4S_NewLife Auto;
 
+Function StartTimer()
+	RegisterForSingleUpdateGameTime(1.0)
+	UpdateStartTime = Utility.GetCurrentGameTime();
+EndFunction
+
 Event OnGameReload()
 	RegisterForSingleUpdateGameTime(1.0)
-	UpdateStartTime = GameHour.GetValue()
 EndEvent
 
 Event OnUpdateGameTime()
 
-	UpdateEndTime = GameHour.GetValue();
-	Float dif = UpdateEndTime - UpdateStartTime
+	UpdateEndTime = Utility.GetCurrentGameTime();
+	Float dif = (UpdateEndTime - UpdateStartTime) * 24;
 	if dif <0
 		dif += 24.0
 	EndIf
@@ -26,7 +30,7 @@ Event OnUpdateGameTime()
 		S4S_NewLife.SetStage(1);
 	Else
 		RegisterForSingleUpdateGameTime(1.0)
-	UpdateStartTime = GameHour.GetValue()
+	UpdateStartTime = Utility.GetCurrentGameTime();
 	EndIf
 	
 EndEvent
