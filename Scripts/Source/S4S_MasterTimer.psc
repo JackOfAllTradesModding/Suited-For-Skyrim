@@ -27,6 +27,7 @@ EndEvent
 
 Event OnUpdateGameTime()
 
+	;If the update is halted, attempt to advance again, which if it runs into the same issue, will re-halt the thing anyways.
 	If (UpdateHalted)
 		UpdateHalted = False
 		Master.ExpandSuit(Stage);
@@ -37,10 +38,11 @@ Event OnUpdateGameTime()
 	UpdateEndTime = Utility.GetCurrentGameTime();
 	Float dif = (UpdateEndTime - UpdateStartTime) * 24
 	
-	;Theoretically no longer needed
-	if dif <0
+	;If the difference is less than 0 hours, make it more
+	;Theoretically no longer needed.
+	While dif <= 0.0
 		dif += 24.0
-	EndIf
+	EndWhile
 	
 	CurrentTime += dif;
 	

@@ -18,29 +18,75 @@ Function ExpandSuit(int Stage)
 ;Will take stage to determine which expansion point we are at. 
 ;Figures out what the next piece is, checks to see if there is a conflict (and it is not the uninflated version) and then removes it if possible
 ;if removal is not possible it will wait (with the help of the timer script) and try again in a little while until it can either expand unhindered or remove the conflicting device
-	
+
+	;collar stage 2
 	If Stage == 10
 		InflateCollar();
+	
+	;suit stage 1
 	ElseIf Stage == 20
 		EquipSuit(Stage);
+	
+	;suit stage 2
 	ElseIf Stage == 30
 		EquipSuit(Stage);
+	
+	;suit stage 3
 	ElseIf Stage == 40
 		EquipSuit(Stage);
+	
+	;suit stage 4
 	ElseIf Stage == 50
-		EquipGloves(Stage)
+		EquipSuit(Stage);
+	
+	;suit stage 5
 	ElseIf Stage == 60
-		EquipGloves(Stage);
+		EquipSuit(Stage);
+	
+	;suit stage 6
 	ElseIf Stage == 70
-		EquipBoots(Stage);
+		EquipSuit(Stage);
+	
+	;suit stage 7
 	ElseIf Stage == 80
-		EquipBoots(Stage);
+		EquipSuit(Stage);
+	
+	;suit stage 8
 	ElseIf Stage == 90
-		EquipMask(Stage);
+		EquipSuit(Stage);
+	
+	;gloves stage 1
 	ElseIf Stage == 100
-		EquipMask(Stage);
+		EquipGloves(Stage)
+	
+	;gloves stage 2
 	ElseIf Stage == 110
+		EquipGloves(Stage);
+	
+	;boots stage 1
+	ElseIf Stage == 120
+		EquipBoots(Stage);
+	
+	;boots stage 2
+	ElseIf Stage == 130
+		EquipBoots(Stage);
+	
+	;mask stage 1
+	ElseIf Stage == 140
+		EquipMask(Stage);
+		
+	;mask stage 2
+	ElseIf Stage == 150
+		EquipMask(Stage);
+	
+	;mask stage 3
+	ElseIf Stage == 160
+		EquipMask(Stage);
+	
+	;final
+	ElseIf Stage == 170
 		EquipFinal();
+	
 	Else
 		;;FIXME: Error
 	EndIf
@@ -48,9 +94,9 @@ Function ExpandSuit(int Stage)
 EndFunction
 
 ;Inflate the collar
-Function InflateCollar()
+Function InflateCollar() ;DONE
 	;Unequip Uninflated Collar
-	libs.RemoveQuestDevice(PlayerREF, S4S_FelineCollarUninflatedInventory, S4S_FelineCollarUninflatedRendered, zad_DeviousBra, S4S_Collar, True)
+	libs.RemoveQuestDevice(PlayerREF, S4S_FelineCollarUninflatedInventory, S4S_FelineCollarUninflatedRendered, zad_DeviousCollar, S4S_Collar, True)
 	;Show Message
 	S4S_msgEquipCollarInflated.Show();
 	;Equip Inflated Collar
@@ -60,117 +106,184 @@ Function InflateCollar()
 	;;;
 EndFunction
 
+
 ;Equip or expand the suit
 Function EquipSuit(int stage = 0)
-	If Stage == 20 
-		;Equip First Suit
-		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit1Rendered, zad_DeviousBra)
-			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousBra);
-			Armor ren = libs.GetRenderedDevice(inv);
-			libs.RemoveDevice(PlayerRef, inv, ren, zad_DeviousBra, skipevents=true); Should remove it with no pop-up from the device removed
+	
+	If Stage == 20
+		;Equip First Suit stage
+			;Cheating here, stage 1 and 2 are actually new collars so you can still equip other devices
 			
-			;Extra check, just in case it's a quest item or something.
-			If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit1Rendered, zad_DeviousBra)
-				;Was a quest item, cannot remove
-				;;FIXME: Debug log
-				Timer.LoopTimer(Stage);
-				Return;
-			Else
-				;Device was removed
-				;Show custom message for removing the bra
-				S4S_msgEquipSuit1Override.Show()
-				;Equip the new item
-				libs.EquipDevice(PlayerRef, S4S_FelineSuit1Inventory, S4S_FelineSuit1Rendered, zad_DeviousBra)
-				Utility.Wait(0.1)
-				Timer.ResetTimer(False, False);
-				S4S_msgEquipSuit1.Show() ;probably not both messages
-				
-			EndIf
-		Else
-			libs.EquipDevice(PlayerRef, S4S_FelineSuit1Inventory, S4S_FelineSuit1Rendered, zad_DeviousBra)
-			Timer.ResetTimer(False, False);
+			;Remove inflated collar
+			libs.RemoveQuestDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, zad_DeviousCollar, S4S_Collar, True)
+			;Show Message
 			S4S_msgEquipSuit1.Show()
-			
-		EndIf
-		
-	ElseIf Stage == 30
-		;Equip Second Suit
-		libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit1Inventory, S4S_FelineSuit1Rendered, zad_DeviousCollar, S4S_Suit, True)
-		
-		;Check for belt
-		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit2Rendered, zad_DeviousBelt)
-			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousBelt);
-			Armor ren = libs.GetRenderedDevice(inv);
-			libs.RemoveDevice(PlayerRef, inv, ren, zad_DeviousSuit, skipevents=true); Should remove it with no pop-up from the device removed
-			
-			;Extra check, just in case it's a quest item or something.
-			If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit2Rendered, zad_DeviousBelt)
-				;Was a quest item, cannot remove
-				;;FIXME: Debug log
-				Timer.LoopTimer(Stage);
-				Return;
-			Else
-				;Device was removed
-				;Show custom message for removing the bra
-				S4S_msgEquipSuit2Override.Show()
-				;Equip the new item
-				libs.EquipDevice(PlayerRef, S4S_FelineSuit2Inventory, S4S_FelineSuit2Rendered, zad_DeviousSuit)
-				Utility.Wait(0.1)
-				Timer.ResetTimer(False, False);
-				S4S_msgEquipSuit2.Show() ;probably not both messages
-				
-			EndIf
-		;Check for suit
-		ElseIf libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit2Rendered, zad_DeviousSuit)
-			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousSuit);
-			Armor ren = libs.GetRenderedDevice(inv);
-			libs.RemoveDevice(PlayerRef, inv, ren, zad_DeviousSuit, skipevents=true); Should remove it with no pop-up from the device removed
-			
-			;Extra check, just in case it's a quest item or something.
-			If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit2Rendered, zad_DeviousSuit)
-				;Was a quest item, cannot remove
-				;;FIXME: Debug log
-				Timer.LoopTimer(Stage);
-				Return;
-			Else
-				;Device was removed
-				;Show custom message for removing the bra
-				S4S_msgEquipSuit2Override.Show()
-				;Equip the new item
-				libs.EquipDevice(PlayerRef, S4S_FelineSuit2Inventory, S4S_FelineSuit2Rendered, zad_DeviousSuit)
-				Utility.Wait(0.1)
-				Timer.ResetTimer(False, False);
-				S4S_msgEquipSuit2.Show() ;probably not both messages
-				
-			EndIf
-		Else
-			libs.EquipDevice(PlayerRef, S4S_FelineSuit2Inventory, S4S_FelineSuit2Rendered, zad_DeviousSuit)
+			;Equip First suit piece
+			libs.EquipDevice(PlayerRef, S4S_FelineSuit1Inventory, S4S_FelineSuit1Rendered, zad_DeviousCollar)
+			;ResetTimer
 			Timer.ResetTimer(False, False);
+	
+	ElseIf Stage == 30
+		;Second suit piece (Secretly a collar)
+			;Remove
+			libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit1Inventory, S4S_FelineSuit1Rendered, zad_DeviousCollar, S4S_Collar, True)
+			;Message
 			S4S_msgEquipSuit2.Show()
-			
+			;Equip
+			libs.EquipDevice(PlayerREF, S4S_FelineSuit2Inventory, S4S_FelineSuit2Rendered, zad_DeviousCollar)
+			;Timer
+			Timer.ResetTimer(False, False);
+	
+	ElseIf Stage == 40 ;Starts conflicting with bra and body armor
+		;Third Suit piece, First actual suit piece, and reequip the collar
+		;Check for a bra
+		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit3Rendered, zad_DeviousBra)
+		;If yes try to remove
+			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousBra)
+			If inv != None
+				Armor ren = libs.getRenderedDevice(inv)
+				libs.RemoveDevice(PlayerREF, inv, ren, zad_DeviousBra, skipevents = True)
+				;Check for it again, if it's still there it's a quest item and the timer loops.
+				If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit3Rendered, zad_DeviousBra)
+					Timer.LoopTimer(Stage)
+					Return
+				Else
+					;Show Override message
+					S4S_msgEquipSuit1Override.Show();
+				EndIf
+			EndIf
 		EndIf
 		
-	ElseIf Stage == 40
-		;Equip third suit
-		libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit2Inventory, S4S_FelineSuit2Rendered, zad_DeviousSuit, S4S_SuitMore, True)
-		;Show Message
-		S4S_msgEquipSuit3.Show();
-		Utility.Wait(0.1);
-		S4S_msgEquipSuit3b.Show();
-		;Equip Inflated Collar
-		libs.EquipDevice(PlayerREF, S4S_FelineSuit3Inventory, S4S_FelineSuit3Rendered, zad_DeviousSuit);
-		;Start Timer (Long)
-		Timer.ResetTimer(True, False);
+		;Check for a suit
+		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit3Rendered, zad_DeviousSuit)
+		;If yes try to remove
+			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousSuit)
+			If inv != None
+				Armor ren = libs.getRenderedDevice(inv)
+				libs.RemoveDevice(PlayerREF, inv, ren, zad_DeviousSuit, skipevents = True)
+				;Check for it again, if it's still there it's a quest item and the timer loops.
+				If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit3Rendered, zad_DeviousSuit)
+					Timer.LoopTimer(Stage)
+					Return
+				Else
+					;Show Override message
+					S4S_msgEquipSuit2Override.Show();
+				EndIf
+			EndIf
+		EndIf
 		
+		;If no conflict (or we dealt with it)
+		;Unequip Suit2
+		libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit2Inventory, S4S_FelineSuit2Rendered, zad_DeviousCollar, S4S_Suit, True)
+		;Reequip inflated collar
+		libs.EquipDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, zad_DeviousCollar)
+		;Message
+		S4S_msgEquipSuit3.Show();
+		;Remove body armor ?
+		;Equip Suit3
+		libs.EquipDevice(PlayerREF, S4S_FelineSuit3Inventory, S4S_FelineSuit3Rendered, zad_DeviousSuit)
+		;Timer
+		Timer.ResetTimer(False, False)
+	
+	ElseIf Stage == 50 ;starts conflicting with belts/harnesses.
+		;Sixth suit piece, more complicated, since it's now belt/harness too
+		;Check for a Belt
+		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit4Rendered, zad_DeviousBelt)
+		;If yes try to remove
+			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousBelt)
+			If inv != None
+				Armor ren = libs.getRenderedDevice(inv)
+				libs.RemoveDevice(PlayerREF, inv, ren, zad_DeviousBelt, skipevents = True)
+				;Check for it again, if it's still there it's a quest item and the timer loops.
+				If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit4Rendered, zad_DeviousBelt)
+					Timer.LoopTimer(Stage)
+					Return
+				Else
+					;Show Override message
+					S4S_msgEquipSuit3Override.Show();
+				EndIf
+			EndIf
+		EndIf
+		
+		;Check for a Harness
+		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit4Rendered, zad_DeviousHarness)
+		;If yes try to remove
+			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousHarness)
+			If inv != None
+				Armor ren = libs.getRenderedDevice(inv)
+				libs.RemoveDevice(PlayerREF, inv, ren, zad_DeviousHarness, skipevents = True)
+				;Check for it again, if it's still there it's a quest item and the timer loops.
+				If libs.WearingConflictingDevice(PlayerREF, S4S_FelineSuit4Rendered, zad_DeviousHarness)
+					Timer.LoopTimer(Stage)
+					Return
+				Else
+					;Show Override message
+					S4S_msgEquipSuit3Override.Show();
+				EndIf
+			EndIf
+		EndIf
+		
+		;If no conflict (or we dealt with it)
+		;Unequip Suit3
+		libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit3Inventory, S4S_FelineSuit3Rendered, zad_DeviousSuit, S4S_Suit, True)
+		;Message
+		S4S_msgEquipSuit4.Show();
+		;Equip Suit4
+		libs.EquipDevice(PlayerREF, S4S_FelineSuit4Inventory, S4S_FelineSuit4Rendered, zad_DeviousSuit)
+		;Timer
+		Timer.ResetTimer(False, False)
+		
+	ElseIf Stage == 60
+		;Fifth Suit Piece
+			;Remove Suit4
+			libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit4Inventory, S4S_FelineSuit4Rendered, zad_DeviousSuit, S4S_SuitMore, True)
+			;Message
+			S4S_msgEquipSuit5.Show()
+			;Equip Suit5
+			libs.EquipDevice(PlayerREF, S4S_FelineSuit5Inventory, S4S_FelineSuit5Rendered, zad_DeviousSuit)
+			;Timer
+			Timer.ResetTimer(False, False)
+	ElseIf Stage == 70
+		;Seventh Suit Piece
+			;Remove Suit5
+			libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit5Inventory, S4S_FelineSuit5Rendered, zad_DeviousSuit, S4S_SuitMore, True)
+			;Message
+			S4S_msgEquipSuit6.Show()
+			;Equip Suit 6
+			libs.EquipDevice(PlayerREF, S4S_FelineSuit6Inventory, S4S_FelineSuit6Rendered, zad_DeviousSuit)
+			;Timer
+			Timer.ResetTimer(False, False)
+	ElseIf Stage == 80
+		;Seventh Suit Piece
+			;Remove Suit6
+			libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit6Inventory, S4S_FelineSuit6Rendered, zad_DeviousSuit, S4S_SuitMore, True)
+			;Message
+			S4S_msgEquipSuit7.Show()
+			;Equip Suit 7
+			libs.EquipDevice(PlayerREF, S4S_FelineSuit7Inventory, S4S_FelineSuit7Rendered, zad_DeviousSuit)
+			;Timer
+			Timer.ResetTimer(False, False)
+	ElseIf Stage == 90
+		;Eight Suit Piece
+			;Remove Suit 7
+			;;FIXME: Commented code
+			;libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit7Inventory, S4S_FelineSuit7Rendered, zad_DeviousSuit, S4S_SuitMore, True)
+			;Message
+			S4S_msgEquipSuitFull.Show()
+			;Equip suit 8
+			;libs.EquipDevice(PlayerREF, S4S_FelineSuit8Inventory, S4S_FelineSuit8Rendered, zad_DeviousSuit)
+			;Timer
+			Timer.ResetTimer(True, False)
 	Else
-		;;FIXME: ERROR
+		;;FIXME: Error
 	EndIf
-	;;;
+		
 EndFunction
+
 
 ;Equip or inflate the gloves
 Function EquipGloves(int stage = 0)
-	If Stage == 50
+	If Stage == 100
 		;Equip Uninflated gloves
 		
 		;Armbinder check
@@ -213,7 +326,7 @@ Function EquipGloves(int stage = 0)
 			Timer.ResetTimer(False, False)
 		EndIf	
 		
-	ElseIf Stage == 60
+	ElseIf Stage == 110
 		;Inflate Gloves
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineGlovesUninflatedInventory, S4S_FelineGlovesUninflatedRendered, zad_DeviousGloves, S4S_Gloves, True)
 		S4S_msgEquipGloves2.Show()
@@ -225,9 +338,10 @@ Function EquipGloves(int stage = 0)
 	;;;
 EndFunction
 
+
 ;Equip or Inflate the Boots
 Function EquipBoots(int stage = 0)
-	If Stage == 70
+	If Stage == 120
 		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineBootsUninflatedRendered, zad_DeviousBoots)
 			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousBoots)
 			Armor ren = libs.GetRenderedDevice(inv)
@@ -250,7 +364,7 @@ Function EquipBoots(int stage = 0)
 			Timer.ResetTimer(False, False)
 			Return;
 		EndIf
-	ElseIf Stage == 80
+	ElseIf Stage == 130
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineBootsUninflatedInventory, S4S_FelineBootsUninflatedRendered, zad_DeviousBoots, S4S_Boots, True)
 		S4S_msgEquipBoots2.Show()
 		Utility.Wait(0.1);
@@ -263,27 +377,26 @@ Function EquipBoots(int stage = 0)
 	EndIf
 EndFunction
 
+
 ;Equip or Inflate the Mask
 Function EquipMask(int stage = 0)
-	If Stage == 90
+	If Stage == 140 ;Fake Collar again because if every machine is like, 6 simple ones and maybe a computer I shouldn't need more than a few workarounds per mod
+		libs.RemoveQuestDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, zad_DeviousCollar, S4S_Collar)
+		libs.EquipDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousCollar)
+	ElseIf Stage == 150
 		;Check for gag/hood
-		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask1Rendered, zad_DeviousGag)
+		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask2Rendered, zad_DeviousGag)
 			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousGag)
 			Armor ren = libs.GetRenderedDevice(inv)
 			libs.RemoveDevice(PlayerREF, inv, ren, zad_DeviousGag, skipevents=true);
-			If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask1Rendered, zad_DeviousGag)
+			If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask2Rendered, zad_DeviousGag)
 				;;Debug
 				Timer.LoopTimer(Stage)
 				Return;
-			Else
-				libs.EquipDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag)
-				S4S_msgEquipMask1Override.Show()
-				Timer.ResetTimer(False, False)
-				Utility.Wait(0.1);
-				S4S_msgEquipMask1Override.Show()
 			EndIf
-			
-		ElseIf libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask1Rendered, zad_DeviousHood)
+		EndIf	
+		;Hood
+		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask1Rendered, zad_DeviousHood)
 			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousHood)
 			Armor ren = libs.GetRenderedDevice(inv)
 			libs.RemoveDevice(PlayerREF, inv, ren, zad_DeviousHood, skipevents=true);
@@ -291,22 +404,18 @@ Function EquipMask(int stage = 0)
 				;;Debug
 				Timer.LoopTimer(Stage)
 				Return;
-			Else
-				libs.EquipDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag)
-				S4S_msgEquipMask2Override.Show()
-				Timer.ResetTimer(False, False)
-				Utility.Wait(0.1);
-				S4S_msgEquipMask1Override.Show()
 			EndIf
-			
-		Else 
-			libs.EquipDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag)
-			S4S_msgEquipMask1.Show()
-			Utility.Wait(0.1);
-			S4S_msgEquipMask1b.Show()
-			Timer.ResetTimer(False, False)
-		EndIf
-	ElseIf Stage == 100
+		EndIf 
+		
+		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousCollar, S4S_Collar)
+		libs.EquipDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, zad_DeviousCollar)
+		libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousGag)
+		S4S_msgEquipMask1Override.Show()
+		Timer.ResetTimer(False, False)
+		Utility.Wait(0.1);
+		S4S_msgEquipMask1Override.Show()
+		
+	ElseIf Stage == 160
 		;check for blindfold
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag, S4S_Mask, True)
 		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
@@ -338,6 +447,7 @@ Function EquipMask(int stage = 0)
 	;S4S_Master was originally going to set the stage one forward but it is unnecesary.
 EndFunction
 
+
 ;Show final message, stop Timer, start NewLife Quest
 Function EquipFinal()
 	;Everything equipped
@@ -361,6 +471,16 @@ Armor Property S4S_FelineSuit2Inventory Auto;
 Armor Property S4S_FelineSuit2Rendered Auto;
 Armor Property S4S_FelineSuit3Inventory Auto;
 Armor Property S4S_FelineSuit3Rendered Auto;
+Armor Property S4S_FelineSuit4Inventory Auto;
+Armor Property S4S_FelineSuit4Rendered Auto;
+Armor Property S4S_FelineSuit5Inventory Auto;
+Armor Property S4S_FelineSuit5Rendered Auto;
+Armor Property S4S_FelineSuit6Inventory Auto;
+Armor Property S4S_FelineSuit6Rendered Auto;
+Armor Property S4S_FelineSuit7Inventory Auto;
+Armor Property S4S_FelineSuit7Rendered Auto;
+Armor Property S4S_FelineSuit8Inventory Auto;
+Armor Property S4S_FelineSuit8Rendered Auto;
 
 Armor Property S4S_FelineBootsUninflatedInventory Auto;
 Armor Property S4S_FelineBootsUninflatedRendered Auto;
@@ -383,6 +503,11 @@ Message Property S4S_msgEquipSuit1  Auto
 Message Property S4S_msgEquipSuit2  Auto  
 Message Property S4S_msgEquipSuit3  Auto 
 Message Property S4S_msgEquipSuit3b  Auto   
+Message Property S4S_msgEquipSuit4  Auto   
+Message Property S4S_msgEquipSuit5  Auto   
+Message Property S4S_msgEquipSuit6  Auto   
+Message Property S4S_msgEquipSuit7  Auto   
+Message Property S4S_msgEquipSuitFull  Auto   
 Message Property S4S_msgEquipBoots1  Auto  
 Message Property S4S_msgEquipBoots2  Auto 
 Message Property S4S_msgEquipBoots2b Auto 
@@ -396,12 +521,13 @@ Message Property S4S_msgEquipFinal  Auto
 Message Property S4S_msgEquipFinalb  Auto  
 
 ;Messages to equip pieces while another device is in the way
-Message Property S4S_msgEquipSuit1Override Auto
-Message Property S4S_msgEquipSuit2Override Auto
-Message Property S4S_msgEquipBootsOverride Auto
+Message Property S4S_msgEquipSuit1Override Auto ;Override Bra - stage 3
+Message Property S4S_msgEquipSuit2Override Auto ;Override Suit - stage 3
+Message Property S4S_msgEquipSuit3Override Auto ;Override Belt/Harness - stage 4
+Message Property S4S_msgEquipBootsOverride Auto 
 Message Property S4S_msgEquipGlovesOverride Auto
-Message Property S4S_msgEquipMask1Override Auto
-Message Property S4S_msgEquipMask2Override Auto
+Message Property S4S_msgEquipMask1Override Auto ;Gag
+Message Property S4S_msgEquipMask2Override Auto ;Blindfold
 Message Property S4S_msgArmbinderRemove Auto
 
 ;Unique keywords on each S4S device, not used in code after update to script
@@ -422,6 +548,7 @@ Keyword Property zad_DeviousCollar Auto
 Keyword Property zad_DeviousBra Auto
 Keyword Property zad_DeviousSuit Auto
 Keyword Property zad_DeviousBelt Auto
+Keyword Property zad_DeviousHarness Auto
 Keyword Property zad_DeviousGloves Auto
 Keyword Property zad_DeviousBondageMittens Auto
 Keyword Property zad_DeviousBoots Auto

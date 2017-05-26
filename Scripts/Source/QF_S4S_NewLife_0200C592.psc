@@ -12,6 +12,15 @@ ReferenceAlias Property Alias_S4S_NewLifeSpeaker Auto
 ReferenceAlias Property Alias_PlayerAlias Auto
 ;END ALIAS PROPERTY
 
+;BEGIN FRAGMENT Fragment_3
+Function Fragment_3()
+;BEGIN CODE
+S4S_LadyInRubber.Start();
+Stop();
+;END CODE
+EndFunction
+;END FRAGMENT
+
 ;BEGIN FRAGMENT Fragment_2
 Function Fragment_2()
 ;BEGIN AUTOCAST TYPE S4S_NewLifeTimer
@@ -21,15 +30,6 @@ S4S_NewLifeTimer kmyQuest = __temp as S4S_NewLifeTimer
 ;BEGIN CODE
 SetObjectiveDisplayed(0);
 kmyQuest.StartTimer();
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_3
-Function Fragment_3()
-;BEGIN CODE
-;S4S_LadyInRubber.Start();
-;Stop();
 ;END CODE
 EndFunction
 ;END FRAGMENT
