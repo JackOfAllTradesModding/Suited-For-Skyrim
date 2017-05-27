@@ -55,36 +55,40 @@ Function ExpandSuit(int Stage)
 	ElseIf Stage == 90
 		EquipSuit(Stage);
 	
-	;gloves stage 1
+	;suit stage 9 - final
 	ElseIf Stage == 100
+		EquipSuit(Stage);
+	
+	;gloves stage 1
+	ElseIf Stage == 110
 		EquipGloves(Stage)
 	
 	;gloves stage 2
-	ElseIf Stage == 110
+	ElseIf Stage == 120
 		EquipGloves(Stage);
 	
 	;boots stage 1
-	ElseIf Stage == 120
-		EquipBoots(Stage);
-	
-	;boots stage 2
 	ElseIf Stage == 130
 		EquipBoots(Stage);
 	
-	;mask stage 1
+	;boots stage 2
 	ElseIf Stage == 140
+		EquipBoots(Stage);
+	
+	;mask stage 1
+	ElseIf Stage == 150
 		EquipMask(Stage);
 		
 	;mask stage 2
-	ElseIf Stage == 150
-		EquipMask(Stage);
-	
-	;mask stage 3
 	ElseIf Stage == 160
 		EquipMask(Stage);
 	
-	;final
+	;mask stage 3
 	ElseIf Stage == 170
+		EquipMask(Stage);
+	
+	;final
+	ElseIf Stage == 180
 		EquipFinal();
 	
 	Else
@@ -264,14 +268,26 @@ Function EquipSuit(int stage = 0)
 			;Timer
 			Timer.ResetTimer(False, False)
 	ElseIf Stage == 90
-		;Eight Suit Piece
+		;Eighth Suit Piece
 			;Remove Suit 7
 			;;FIXME: Commented code
-			;libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit7Inventory, S4S_FelineSuit7Rendered, zad_DeviousSuit, S4S_SuitMore, True)
+			libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit7Inventory, S4S_FelineSuit7Rendered, zad_DeviousSuit, S4S_SuitMore, True)
+			;Message
+			S4S_msgEquipSuit8.Show()
+			;Equip suit 8
+			libs.EquipDevice(PlayerREF, S4S_FelineSuit8Inventory, S4S_FelineSuit8Rendered, zad_DeviousSuit)
+			;Timer
+			Timer.ResetTimer(True, False)
+			
+	ElseIf Stage == 100
+		;Last Suit Piece
+			;Remove Suit 8
+			;;FIXME: Commented code
+			libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit8Inventory, S4S_FelineSuit8Rendered, zad_DeviousSuit, S4S_SuitMore, True)
 			;Message
 			S4S_msgEquipSuitFull.Show()
-			;Equip suit 8
-			;libs.EquipDevice(PlayerREF, S4S_FelineSuit8Inventory, S4S_FelineSuit8Rendered, zad_DeviousSuit)
+			;Equip suit 9
+			libs.EquipDevice(PlayerREF, S4S_FelineSuit9Inventory, S4S_FelineSuit9Rendered, zad_DeviousSuit)
 			;Timer
 			Timer.ResetTimer(True, False)
 	Else
@@ -283,7 +299,7 @@ EndFunction
 
 ;Equip or inflate the gloves
 Function EquipGloves(int stage = 0)
-	If Stage == 100
+	If Stage == 110
 		;Equip Uninflated gloves
 		
 		;Armbinder check
@@ -326,7 +342,7 @@ Function EquipGloves(int stage = 0)
 			Timer.ResetTimer(False, False)
 		EndIf	
 		
-	ElseIf Stage == 110
+	ElseIf Stage == 120
 		;Inflate Gloves
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineGlovesUninflatedInventory, S4S_FelineGlovesUninflatedRendered, zad_DeviousGloves, S4S_Gloves, True)
 		S4S_msgEquipGloves2.Show()
@@ -341,7 +357,7 @@ EndFunction
 
 ;Equip or Inflate the Boots
 Function EquipBoots(int stage = 0)
-	If Stage == 120
+	If Stage == 130
 		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineBootsUninflatedRendered, zad_DeviousBoots)
 			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousBoots)
 			Armor ren = libs.GetRenderedDevice(inv)
@@ -364,7 +380,7 @@ Function EquipBoots(int stage = 0)
 			Timer.ResetTimer(False, False)
 			Return;
 		EndIf
-	ElseIf Stage == 130
+	ElseIf Stage == 140
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineBootsUninflatedInventory, S4S_FelineBootsUninflatedRendered, zad_DeviousBoots, S4S_Boots, True)
 		S4S_msgEquipBoots2.Show()
 		Utility.Wait(0.1);
@@ -380,10 +396,12 @@ EndFunction
 
 ;Equip or Inflate the Mask
 Function EquipMask(int stage = 0)
-	If Stage == 140 ;Fake Collar again because if every machine is like, 6 simple ones and maybe a computer I shouldn't need more than a few workarounds per mod
+	If Stage == 150 ;Fake Collar again because if every machine is like, 6 simple ones and maybe a computer I shouldn't need more than a few workarounds per mod
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, zad_DeviousCollar, S4S_Collar)
+		S4S_msgEquipMask1.Show();
 		libs.EquipDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousCollar)
-	ElseIf Stage == 150
+		
+	ElseIf Stage == 160
 		;Check for gag/hood
 		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask2Rendered, zad_DeviousGag)
 			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousGag)
@@ -394,6 +412,7 @@ Function EquipMask(int stage = 0)
 				Timer.LoopTimer(Stage)
 				Return;
 			EndIf
+			S4S_msgEquipMask1Override.Show()
 		EndIf	
 		;Hood
 		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask1Rendered, zad_DeviousHood)
@@ -405,19 +424,19 @@ Function EquipMask(int stage = 0)
 				Timer.LoopTimer(Stage)
 				Return;
 			EndIf
+			S4S_msgEquipMask1Override.Show()
 		EndIf 
 		
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousCollar, S4S_Collar)
 		libs.EquipDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, zad_DeviousCollar)
 		libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousGag)
-		S4S_msgEquipMask1Override.Show()
+		S4S_msgEquipMask2.Show()
 		Timer.ResetTimer(False, False)
 		Utility.Wait(0.1);
-		S4S_msgEquipMask1Override.Show()
 		
-	ElseIf Stage == 160
+		
+	ElseIf Stage == 170 ;;FIXME: This whole stage needs reworking
 		;check for blindfold
-		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag, S4S_Mask, True)
 		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
 			Armor inv = libs.GetWornDevice(PlayerREF, zad_DeviousBlindFold)
 			Armor ren = libs.GetRenderedDevice(inv);
@@ -428,18 +447,16 @@ Function EquipMask(int stage = 0)
 				Return;
 			Else
 				S4S_msgEquipMask2Override.Show()
-				libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
-				Timer.ResetTimer(False, False)
-				Utility.Wait(0.1);
-				S4S_msgEquipMask2Override.Show()
 			EndIf
-		Else
-			libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
-			S4S_msgEquipMask2.Show()
-			Utility.Wait(0.1);
-			S4S_msgEquipMask2b.Show();
-			Timer.ResetTimer(False, False)
 		EndIf
+		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag, S4S_Mask, True)
+		
+			libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
+			S4S_msgEquipMask3.Show()
+			Utility.Wait(0.1);
+			S4S_msgEquipMask3b.Show();
+			Timer.ResetTimer(False, False)
+
 	Else
 		;;DEBUG
 		Return;
@@ -481,6 +498,8 @@ Armor Property S4S_FelineSuit7Inventory Auto;
 Armor Property S4S_FelineSuit7Rendered Auto;
 Armor Property S4S_FelineSuit8Inventory Auto;
 Armor Property S4S_FelineSuit8Rendered Auto;
+Armor Property S4S_FelineSuit9Inventory Auto;
+Armor Property S4S_FelineSuit9Rendered Auto;
 
 Armor Property S4S_FelineBootsUninflatedInventory Auto;
 Armor Property S4S_FelineBootsUninflatedRendered Auto;
@@ -496,6 +515,8 @@ Armor Property S4S_FelineMask1Inventory Auto;
 Armor Property S4S_FelineMask2Inventory Auto;
 Armor Property S4S_FelineMask1Rendered Auto;
 Armor Property S4S_FelineMask2Rendered Auto;
+Armor Property S4S_FelineMask3Invnetory Auto;
+Armor Property S4S_FelineMask3Rendered Auto;
 
 ;messages about equipping each of the pieces
 Message Property S4S_msgEquipCollarInflated  Auto  
@@ -507,6 +528,7 @@ Message Property S4S_msgEquipSuit4  Auto
 Message Property S4S_msgEquipSuit5  Auto   
 Message Property S4S_msgEquipSuit6  Auto   
 Message Property S4S_msgEquipSuit7  Auto   
+Message Property S4S_msgEquipSuit8  Auto   
 Message Property S4S_msgEquipSuitFull  Auto   
 Message Property S4S_msgEquipBoots1  Auto  
 Message Property S4S_msgEquipBoots2  Auto 
@@ -514,9 +536,10 @@ Message Property S4S_msgEquipBoots2b Auto
 Message Property S4S_msgEquipGloves1  Auto  
 Message Property S4S_msgEquipGloves2  Auto  
 Message Property S4S_msgEquipMask1  Auto  
-Message Property S4S_msgEquipMask1b Auto
-Message Property S4S_msgEquipMask2  Auto
-Message Property S4S_msgEquipMask2b  Auto  
+Message Property S4S_msgEquipMask2 Auto
+Message Property S4S_msgEquipMask2b Auto
+Message Property S4S_msgEquipMask3  Auto
+Message Property S4S_msgEquipMask3b  Auto  
 Message Property S4S_msgEquipFinal  Auto  
 Message Property S4S_msgEquipFinalb  Auto  
 

@@ -2,11 +2,6 @@
 ;NEXT FRAGMENT INDEX 12
 Scriptname S4S_Intro_QF Extends Quest Hidden
 
-;BEGIN ALIAS PROPERTY DeliveryBoy
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_DeliveryBoy Auto
-;END ALIAS PROPERTY
-
 ;BEGIN ALIAS PROPERTY PlayerAlias
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_PlayerAlias Auto
@@ -17,14 +12,14 @@ ReferenceAlias Property Alias_PlayerAlias Auto
 ReferenceAlias Property Alias_MralkiInnMarker Auto
 ;END ALIAS PROPERTY
 
+;BEGIN ALIAS PROPERTY DeliveryBoy
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_DeliveryBoy Auto
+;END ALIAS PROPERTY
+
 ;BEGIN ALIAS PROPERTY S4S_InnMarkerAlias
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_S4S_InnMarkerAlias Auto
-;END ALIAS PROPERTY
-
-;BEGIN ALIAS PROPERTY CollarPlaceholder
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_CollarPlaceholder Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN ALIAS PROPERTY Mralki
@@ -68,6 +63,14 @@ SetStage(200); end stage for this quest, starts S4S_Dummy
 EndFunction
 ;END FRAGMENT
 
+;BEGIN FRAGMENT Fragment_0
+Function Fragment_0()
+;BEGIN CODE
+;Moves the delivery boy close to the player and gets that forcegreet ready
+;END CODE
+EndFunction
+;END FRAGMENT
+
 ;BEGIN FRAGMENT Fragment_5
 Function Fragment_5()
 ;BEGIN CODE
@@ -81,14 +84,6 @@ utility.wait(1.5); in case this keeps running while we fade back in
 SetStage(202);
 ;
 ;Moved to Mralki Dialogue and Extra Stage to flow better
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_0
-Function Fragment_0()
-;BEGIN CODE
-;Moves the delivery boy close to the player and gets that forcegreet ready
 ;END CODE
 EndFunction
 ;END FRAGMENT
