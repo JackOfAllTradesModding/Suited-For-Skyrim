@@ -286,6 +286,7 @@ Function EquipSuit(int stage = 0)
 			libs.RemoveQuestDevice(PlayerREF, S4S_FelineSuit8Inventory, S4S_FelineSuit8Rendered, zad_DeviousSuit, S4S_SuitMore, True)
 			;Message
 			S4S_msgEquipSuitFull.Show()
+			S4S_msgEquipSuitFullb.Show()
 			;Equip suit 9
 			libs.EquipDevice(PlayerREF, S4S_FelineSuit9Inventory, S4S_FelineSuit9Rendered, zad_DeviousSuit)
 			;Timer
@@ -449,9 +450,9 @@ Function EquipMask(int stage = 0)
 				S4S_msgEquipMask2Override.Show()
 			EndIf
 		EndIf
-		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousGag, S4S_Mask, True)
+		libs.RemoveQuestDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousGag, S4S_Mask, True)
 		
-			libs.EquipDevice(PlayerREF, S4S_FelineMask2Inventory, S4S_FelineMask2Rendered, zad_DeviousBlindFold)
+			libs.EquipDevice(PlayerREF, S4S_FelineMask3Inventory, S4S_FelineMask3Rendered, zad_DeviousBlindFold)
 			S4S_msgEquipMask3.Show()
 			Utility.Wait(0.1);
 			S4S_msgEquipMask3b.Show();
@@ -515,7 +516,7 @@ Armor Property S4S_FelineMask1Inventory Auto;
 Armor Property S4S_FelineMask2Inventory Auto;
 Armor Property S4S_FelineMask1Rendered Auto;
 Armor Property S4S_FelineMask2Rendered Auto;
-Armor Property S4S_FelineMask3Invnetory Auto;
+Armor Property S4S_FelineMask3Inventory Auto;
 Armor Property S4S_FelineMask3Rendered Auto;
 
 ;messages about equipping each of the pieces
@@ -529,7 +530,8 @@ Message Property S4S_msgEquipSuit5  Auto
 Message Property S4S_msgEquipSuit6  Auto   
 Message Property S4S_msgEquipSuit7  Auto   
 Message Property S4S_msgEquipSuit8  Auto   
-Message Property S4S_msgEquipSuitFull  Auto   
+Message Property S4S_msgEquipSuitFull  Auto    
+Message Property S4S_msgEquipSuitFullb  Auto   
 Message Property S4S_msgEquipBoots1  Auto  
 Message Property S4S_msgEquipBoots2  Auto 
 Message Property S4S_msgEquipBoots2b Auto 
