@@ -384,10 +384,10 @@ Function EquipBoots(int stage = 0)
 	ElseIf Stage == 140
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineBootsUninflatedInventory, S4S_FelineBootsUninflatedRendered, zad_DeviousBoots, S4S_Boots, True)
 		S4S_msgEquipBoots2.Show()
-		Utility.Wait(0.1);
+		;Utility.Wait(0.1);
 		S4S_msgEquipBoots2b.Show()
 		libs.EquipDevice(PlayerREF, S4S_FelineBootsInflatedInventory, S4S_FelineBootsInflatedRendered, zad_DeviousBoots)
-		Timer.ResetTimer(True, False)
+		Timer.ResetTimer(False, False)
 		Return;
 	Else 
 		;;Debug
@@ -401,7 +401,7 @@ Function EquipMask(int stage = 0)
 		libs.RemoveQuestDevice(PlayerREF, S4S_FelineCollarInflatedInventory, S4S_FelineCollarInflatedRendered, zad_DeviousCollar, S4S_Collar)
 		S4S_msgEquipMask1.Show();
 		libs.EquipDevice(PlayerREF, S4S_FelineMask1Inventory, S4S_FelineMask1Rendered, zad_DeviousCollar)
-		
+		Timer.ResetTimer(False,False);
 	ElseIf Stage == 160
 		;Check for gag/hood
 		If libs.WearingConflictingDevice(PlayerREF, S4S_FelineMask2Rendered, zad_DeviousGag)

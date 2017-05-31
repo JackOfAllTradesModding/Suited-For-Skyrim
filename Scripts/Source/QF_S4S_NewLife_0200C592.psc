@@ -16,6 +16,7 @@ ReferenceAlias Property Alias_PlayerAlias Auto
 Function Fragment_3()
 ;BEGIN CODE
 S4S_LadyInRubber.Start();
+Debug.Trace("S4S: New Life Ending, Lady in Rubber Starting")
 Stop();
 ;END CODE
 EndFunction
