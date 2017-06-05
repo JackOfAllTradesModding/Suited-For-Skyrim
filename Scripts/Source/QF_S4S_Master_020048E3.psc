@@ -7,132 +7,15 @@ Scriptname QF_S4S_Master_020048E3 Extends Quest Hidden
 ReferenceAlias Property Alias_S4S_PlayerAlias Auto
 ;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_23
-Function Fragment_23()
+;BEGIN FRAGMENT Fragment_21
+Function Fragment_21()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
 Quest __temp = self as Quest
 s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
-;Mask Stage 2
-kmyQuest.ExpandSuit(160);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_20
-Function Fragment_20()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Gloves Stage 2
-kmyQuest.ExpandSuit(120);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_12
-Function Fragment_12()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Suit Stage 5
-kmyQuest.ExpandSuit(60);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_13
-Function Fragment_13()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Suit Stage 6
-kmyQuest.ExpandSuit(70);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_15
-Function Fragment_15()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Suit Stage 8
-kmyQuest.ExpandSuit(90);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_17
-Function Fragment_17()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Gloves Stage 1
-kmyQuest.ExpandSuit(110);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_9
-Function Fragment_9()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Suit Stage 2
-kmyQuest.ExpandSuit(30);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_26
-Function Fragment_26()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Mask stage 3
-kmyQuest.ExpandSuit(170);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_22
-Function Fragment_22()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Mask Stage 1
-kmyQuest.ExpandSuit(150);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_11
-Function Fragment_11()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Suit Stage 4
-kmyQuest.ExpandSuit(50);
+;Boots stage 2
+kmyQuest.ExpandSuit(140);
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -150,15 +33,132 @@ kmyQuest.ExpandSuit(10);
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_21
-Function Fragment_21()
+;BEGIN FRAGMENT Fragment_23
+Function Fragment_23()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
 Quest __temp = self as Quest
 s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
-;Boots stage 2
-kmyQuest.ExpandSuit(140);
+;Mask Stage 2
+kmyQuest.ExpandSuit(160);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_16
+Function Fragment_16()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Suit Stage 9 - Final
+kmyQuest.ExpandSuit(100);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_20
+Function Fragment_20()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Gloves Stage 2
+kmyQuest.ExpandSuit(120);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_17
+Function Fragment_17()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Gloves Stage 1
+kmyQuest.ExpandSuit(110);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_11
+Function Fragment_11()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Suit Stage 4
+kmyQuest.ExpandSuit(50);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_9
+Function Fragment_9()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Suit Stage 2
+kmyQuest.ExpandSuit(30);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_14
+Function Fragment_14()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Suit Stage 7
+kmyQuest.ExpandSuit(80);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_26
+Function Fragment_26()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Mask stage 3
+kmyQuest.ExpandSuit(170);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_13
+Function Fragment_13()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Suit Stage 6
+kmyQuest.ExpandSuit(70);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_12
+Function Fragment_12()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Suit Stage 5
+kmyQuest.ExpandSuit(60);
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -189,32 +189,6 @@ S4S_NewLife.Start()
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_10
-Function Fragment_10()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Suit stage 3
-kmyQuest.ExpandSuit(40);
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_14
-Function Fragment_14()
-;BEGIN AUTOCAST TYPE s4s_masterscript
-Quest __temp = self as Quest
-s4s_masterscript kmyQuest = __temp as s4s_masterscript
-;END AUTOCAST
-;BEGIN CODE
-;Suit Stage 7
-kmyQuest.ExpandSuit(80);
-;END CODE
-EndFunction
-;END FRAGMENT
-
 ;BEGIN FRAGMENT Fragment_8
 Function Fragment_8()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
@@ -228,15 +202,41 @@ kmyQuest.ExpandSuit(20);
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_16
-Function Fragment_16()
+;BEGIN FRAGMENT Fragment_15
+Function Fragment_15()
 ;BEGIN AUTOCAST TYPE s4s_masterscript
 Quest __temp = self as Quest
 s4s_masterscript kmyQuest = __temp as s4s_masterscript
 ;END AUTOCAST
 ;BEGIN CODE
-;Suit Stage 9 - Final
-kmyQuest.ExpandSuit(100);
+;Suit Stage 8
+kmyQuest.ExpandSuit(90);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_22
+Function Fragment_22()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Mask Stage 1
+kmyQuest.ExpandSuit(150);
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_10
+Function Fragment_10()
+;BEGIN AUTOCAST TYPE s4s_masterscript
+Quest __temp = self as Quest
+s4s_masterscript kmyQuest = __temp as s4s_masterscript
+;END AUTOCAST
+;BEGIN CODE
+;Suit stage 3
+kmyQuest.ExpandSuit(40);
 ;END CODE
 EndFunction
 ;END FRAGMENT

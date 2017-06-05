@@ -2,9 +2,9 @@
 ;NEXT FRAGMENT INDEX 4
 Scriptname QF_S4S_LadyInRubber_080168D6 Extends Quest Hidden
 
-;BEGIN ALIAS PROPERTY S4S_DollMaker
+;BEGIN ALIAS PROPERTY S4S_TheFuckinDoorToSkyrim
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_S4S_DollMaker Auto
+ReferenceAlias Property Alias_S4S_TheFuckinDoorToSkyrim Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN ALIAS PROPERTY S4S_SigilStoneAlias
@@ -12,19 +12,10 @@ ReferenceAlias Property Alias_S4S_DollMaker Auto
 ReferenceAlias Property Alias_S4S_SigilStoneAlias Auto
 ;END ALIAS PROPERTY
 
-;BEGIN ALIAS PROPERTY S4S_TheFuckinDoorToSkyrim
+;BEGIN ALIAS PROPERTY S4S_DollMaker
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_S4S_TheFuckinDoorToSkyrim Auto
+ReferenceAlias Property Alias_S4S_DollMaker Auto
 ;END ALIAS PROPERTY
-
-;BEGIN FRAGMENT Fragment_0
-Function Fragment_0()
-;BEGIN CODE
-Alias_S4S_SigilStoneAlias.getReference().Enable();
-libs.AddToDisableDialogueFaction(S4S_DollMaster)
-;END CODE
-EndFunction
-;END FRAGMENT
 
 ;BEGIN FRAGMENT Fragment_2
 Function Fragment_2()
@@ -43,6 +34,16 @@ Function Fragment_3()
 ;Then it moves to Stage 17 and sits there until the next update adds more.
 SetObjectiveCompleted(10)
 SetObjectiveDisplayed(20)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_0
+Function Fragment_0()
+;BEGIN CODE
+Alias_S4S_SigilStoneAlias.getReference().Enable();
+libs.AddToDisableDialogueFaction(S4S_DollMaster)
+SetObjectiveDisplayed(0)
 ;END CODE
 EndFunction
 ;END FRAGMENT
